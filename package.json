@@ -1,15 +1,21 @@
 {
-  "name": "to",
+  "name": "minimal-ts-chrome-extension",
   "version": "0.0.1",
-  "description": "to",
+  "description": "minimal-ts-chrome-extension",
   "main": "src/background.js",
   "scripts": {
     "build": "tsc",
-    "watch": "npm run build -- --watch"
+    "watch-chrome": "tmux new-session -s $npm_package_name 'tsc --watch'",
+    "watch-firefox": "tmux new-session -s $npm_package_name 'tsc --watch' \\; split-window -h 'web-ext run'",
+    "stop": "tmux kill-session -t $npm_package_name",
+    "start": "npm run stop && npm run watch-${BROWSER:-chrome}"
   },
   "author": "Evan Purcer <evanpurcer@gmail.com> (http://evnp.ca)",
   "license": "ISC",
   "dependencies": {
     "@types/chrome": "0.0.86"
+  },
+  "devDependencies": {
+    "web-ext": "^3.0.0"
   }
 }
