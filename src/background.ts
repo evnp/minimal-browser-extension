@@ -7,15 +7,15 @@ const goLinkRegex = /^(?:https?:\/\/)?go\/([a-z]+)$/i;
 (async function init() {
   // construct map of urlKey -> url
   // e.g. {gogadget: "https://www.gogadget.com", ...}
-  const urls: {string: string} = Object.assign(
+  const urls: {[key: string]: string} = Object.assign(
     {},
     ...[
       ...await loadBookmarks(),
       ...await loadHistory({maxResults: 1000}),
     ]
-    .map(url => [(url.match(urlRegex) || [])[1], url])
+    .map(url => [((url || ``).match(urlRegex) || [])[1], url])
     .filter(([urlKey]) => urlKey)
-    .map(([urlKey, url]) => ({[urlKey]: url})),
+    .map(([urlKey, url]) => ({[urlKey || ``]: url})),
   );
 
   // redirect https://go/urlKey -> url

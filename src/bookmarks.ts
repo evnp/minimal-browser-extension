@@ -9,10 +9,10 @@ export async function loadBookmarks() {
 
   while (nodes.length) {
     let node = nodes.shift();
-    if (node.children && node.children.length) {
+    if (node && node.children && node.children.length) {
       nodes = nodes.concat(node.children);
     }
-    if (node.url) {
+    if (node && node.url) {
       urls.push(node.url);
     }
   }
