@@ -16,6 +16,6 @@
     "@types/chrome": "0.0.86"
   },
   "devDependencies": {
-    "web-ext": "^3.0.0"
+    "web-ext": "^3.2.1"
   }
 }
